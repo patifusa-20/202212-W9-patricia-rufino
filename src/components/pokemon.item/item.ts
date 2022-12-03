@@ -1,5 +1,5 @@
 import { Component } from '../component/component.js';
-import { Serie } from '../../models/serie.js';
+import { Serie } from '../../models/pokemon.model.js';
 import { Score } from '../serie.score/score.js';
 
 export class Item extends Component {

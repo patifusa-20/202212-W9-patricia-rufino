@@ -1,7 +1,7 @@
 import { Component } from '../component/component.js';
-import { Serie } from '../../models/serie.js';
+import { Serie } from '../../models/pokemon.model.js';
 import { Item } from '../serie.item/item.js';
-import { initSeries } from '../../mocks/series.js';
+import { initSeries } from '../../mocks/pokemons.mock.js';
 
 export class List extends Component {
     series!: Array<Serie>;

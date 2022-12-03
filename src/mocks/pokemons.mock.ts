@@ -1,4 +1,4 @@
-import { Serie } from '../models/serie.js';
+import { Serie } from '../models/pokemon.model.js';
 
 export const series = [
     new Serie(

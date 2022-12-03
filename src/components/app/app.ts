@@ -1,8 +1,8 @@
 import { Header } from '../header/header.js';
 import { Main } from '../serie.main/main.js';
 import { List } from '../serie.list/list.js';
-import { initSeries } from '../../mocks/series.js';
-import { Serie } from '../../models/serie.js';
+import { initSeries } from '../../mocks/pokemons.mock.js';
+import { Serie } from '../../models/pokemon.model.js';
 
 export class App {
     series: Array<Serie>;
