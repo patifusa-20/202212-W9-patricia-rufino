@@ -4,7 +4,8 @@
 
 ## Pokemon
 
-<img align="left" width="269" height="98" alt="POKEMON LOGO" src="/dist/assets/pokemon-logo.svg">
+![POKEMON LOGO](/dist/assets/pokemon-logo.svg)
+
 Programar una aplicación web que muestre un listado de **_Pokemon_**, sus detalles y los favoritos.
 
 ## Requisitos
