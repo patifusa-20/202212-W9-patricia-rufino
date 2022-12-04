@@ -4,15 +4,15 @@
 
 ## Pokemon
 
-Programar una aplicación que gestiona un listado de **_Series_**, separándolas entre series vistas y no vistas.
+<img align="left" width="269" height="98" alt="POKEMON LOGO" src="/dist/assets/pokemon-logo.svg">
+Programar una aplicación web que muestre un listado de **_Pokemon_**, sus detalles y los favoritos.
 
 ## Requisitos
 
--   [x] Esta aplicación se alimentará de un objeto JS que tienes en el archivo `series.js`.
--   [x] Cada serie tiene que mostrar toda la información que se muestra en la maquetación dada.
--   [x] Si la serie es no vista, sus estrellas tienen que estar a 0 y el usuario debería poder clicar para valorar la serie con las estrellas que crea necesarias.
--   [x] Al clicar en una estrella, la aplicación debe modificar la valoración y la serie debe pasar de no vista a vista (no hay ninguna manera de pasar una serie de vista a no vista).
--   [x] Si el usuario hace click en el icono de la x, la serie se debe eliminar.
+-   [x] El listado de todos los pokémon se alimentará de la **_PokéAPI_**, y deberá ir paginado. El listado deberá ir acompañado de dos botones, para avanzar y retroceder de página. También debe mostrar el total de pokèmon mostrados vs. el total de pokèmon que existen (p.e. 10/1000).
+-   [x] El usuario debe poder añadir los pokémon que quiera a su listado local. El listado de Mis pokémon se alimentará de una API local. El usuario debería poder eliminar pokémon de su listado local, y también modificar algún/unos dato/s.
+-   [x] En cualquiera de los listados, el usuario debería poder ir al detalle de un pokémon, donde se le mostrarán más datos. A esta página de detalle se llega pasando una id por la URL (la id del pokémon que queremos ver).
+-   [x] BEM, HTML semántico y Testing.
 
 ## Resultado
 
