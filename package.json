@@ -45,6 +45,7 @@
     },
     "dependencies": {
         "@testing-library/user-event": "^14.4.3",
-        "@types/testing-library__dom": "^7.5.0"
+        "@types/testing-library__dom": "^7.5.0",
+        "pokedex-promise-v2": "^4.0.0"
     }
 }
