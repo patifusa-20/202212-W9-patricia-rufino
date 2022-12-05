@@ -14,6 +14,13 @@ export type PokemonObjType = {
 export type PokemonListType = {
     name: string;
     url: string;
+    id: string;
+};
+
+export type PokemonDetailsType = {
+    name: string;
+    sprites: object;
+    id: number;
 };
 
 export class Pokemon implements PokemonType {
