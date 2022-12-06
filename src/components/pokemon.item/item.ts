@@ -2,6 +2,7 @@ import {
     PokemonDetailsType,
     PokemonObjType,
 } from '../../models/pokemon.model.js';
+import { DetailsPage } from '../../pages/details/details.js';
 import { Component } from '../component/component.js';
 
 export class Item extends Component {
@@ -17,18 +18,28 @@ export class Item extends Component {
     }
 
     render() {
-        return super.innRender(this.selector);
+        const element = super.innRender(this.selector);
+        element
+            .querySelector('.item__image')
+            ?.addEventListener('click', this.handleDetailsButton.bind(this));
+        return element;
+    }
+
+    handleDetailsButton() {
+        console.log('estoy clicando');
     }
 
     createTemplate() {
         return `
-        <li class="item">        
+        <li class="item">
+            <a href="details.html?id=${this.item.id}">
             <div class="item__image">
                 <img src="${this.item.sprites.other.dream_world.front_default}">
-            </div>   
+            </div>
             <div class="item__info">
                 <p>${this.item.name}</p>
             </div>
+            </a>
         </li>
         `;
     }

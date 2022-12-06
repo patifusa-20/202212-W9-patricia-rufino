@@ -5,28 +5,32 @@ import {
 } from '../../models/pokemon.model.js';
 import { Item } from '../pokemon.item/item.js';
 import { PokemonsRepo } from '../../repository/pokemons.repo.js';
+import { Pagination } from '../pokemon.pagination/pagination.js';
 
 export class List extends Component {
     pokemonsUrl!: Array<PokemonListType>;
     pokemonsDetails!: Array<PokemonDetailsType>;
     repo = new PokemonsRepo();
-    url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
     urlOffsetPokemon = 0;
+    resultsPerPage = 20;
+    maxResults = 300;
+    url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
+
     constructor(private selector: string) {
         super();
-        this.init();
+        this.init(this.url);
     }
 
-    async init() {
-        await this.loadPokemons(this.url);
+    async init(url: string) {
+        await this.loadPokemons(url);
         await this.getPokemonData();
     }
 
     async manageComponent() {
         this.template = this.createTemplate();
         this.render();
-
         try {
+            //new Pagination('.pagination');
             await this.pokemonsDetails.forEach((item) => {
                 new Item('ul.items', item);
             });
@@ -68,21 +72,21 @@ export class List extends Component {
     }
 
     refreshNextPage(page: number) {
-        page = page + 10;
+        page = page + this.resultsPerPage;
         this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page}`;
-        this.init();
+        this.init(this.url);
+        return (this.urlOffsetPokemon = page);
+    }
+
+    refreshPrevPage(page: number) {
+        page = page - this.resultsPerPage;
+        this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page}`;
+        this.init(this.url);
         return (this.urlOffsetPokemon = page);
     }
 
     handleNextButton() {
         this.refreshNextPage(this.urlOffsetPokemon);
-    }
-
-    refreshPrevPage(page: number) {
-        page = page - 10;
-        this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page}`;
-        this.init();
-        return (this.urlOffsetPokemon = page);
     }
 
     handlePrevButton() {
@@ -92,15 +96,19 @@ export class List extends Component {
     private createTemplate() {
         return `
             <h3>Pokemon List</h3>
-            <div class="pagination">
+            <div class="pagination"><p>${
+                this.resultsPerPage + this.urlOffsetPokemon
+            } / ${this.maxResults}</p>
+         ${
+             this.urlOffsetPokemon === 0
+                 ? ``
+                 : `<button id="btn-prev">Prev</button>`
+         }   
             ${
-                this.urlOffsetPokemon === 0
+                this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
                     ? ``
-                    : `<button id="btn-prev">Prev</button>`
-            }                
-
-                <button id="btn-next">Next</button>
-            </div>  
+                    : `<button id="btn-next">Next</button>`
+            } </div>  
             <ul class="items"></ul>  
         `;
     }

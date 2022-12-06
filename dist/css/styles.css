@@ -3,12 +3,25 @@
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+    color: initial;
+    cursor: pointer;
+}
+
 body {
     background-color: khaki;
+    color: black;
 }
 
 ul {
     list-style: none;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .items {
@@ -22,6 +35,7 @@ ul {
     padding: 1rem;
     background-color: white;
     width: 200px;
+    cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(63, 55, 20, 0.2);
 }
