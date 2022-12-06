@@ -17,9 +17,13 @@ export type PokemonListType = {
     id: string;
 };
 
+type PokemonImagesType = {
+    front_default: string;
+};
+
 export type PokemonDetailsType = {
     name: string;
-    sprites: object;
+    sprites: Object<PokemonImagesType>;
     id: number;
 };
 

@@ -8,14 +8,14 @@ import { Component } from '../component/component.js';
 
 export class Item extends Component {
     pokemons!: PokemonObjType;
-    pokemonData: PokemonDetailsType;
+    pokemonData!: PokemonDetailsType;
     repo: PokemonsRepo;
     constructor(private selector: string, private item: PokemonListType) {
         super();
 
         this.item = item;
         this.repo = new PokemonsRepo();
-        this.pokemonData = this.getPokemonData();
+        this.printPokemon();
         this.template = this.createTemplate();
         this.render();
     }
@@ -26,23 +26,40 @@ export class Item extends Component {
             .replace('/', '');
     }
 
-    async getPokemonData() {
-        const response = await fetch(this.item.url);
-        this.pokemonData = await response.json();
-        console.log(this.pokemonData);
-        return this.pokemonData;
+    getPokemonData() {
+        // Lo siguiente me devuelve una promesa
+        const respuesta = fetch(this.item.url).then((response) => {
+            return response.json();
+        });
+        // Resuelvo la promesa ->
+        return respuesta
+            .then((data) => data)
+            .catch((error) => console.log(error.message));
+    }
+
+    async printPokemon() {
+        const a = await this.getPokemonData();
+        this.pokemonData = a;
+        this.manageComponent();
+    }
+
+    manageComponent() {
+        this.template = this.createTemplate();
+        this.render();
     }
 
     render() {
+        super.cleanHtml(this.selector);
         return super.innRender(this.selector);
     }
 
     createTemplate() {
         return `
-        <li class="item-task">       
+        <li class="item-task">     
             <p>${this.item.name}</p>
             <p>${this.item.url}</p>
             <p>${this.pokemonData.name}</p>
+            <img src="${this.pokemonData.sprites.front_default}">
         </li>
         `;
     }

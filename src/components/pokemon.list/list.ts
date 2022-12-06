@@ -21,8 +21,14 @@ export class List extends Component {
         this.render();
         try {
             this.pokemons?.results?.forEach((item) => {
-                const poke = new Item('ul.slot-items', item);
-                poke.getPokemonData();
+                // const newArray = this.pokemons.results.map((item) => item);
+                // for (const element of newArray) {
+                console.log('Antes de instanciar Item -> ');
+                console.log(this.pokemons.results);
+                new Item('ul.slot-items', item);
+                console.log('Después de instanciar Item -> ');
+                console.log(this.pokemons.results);
+                // }
             });
         } catch (error) {
             console.log((error as Error).message);
@@ -37,10 +43,6 @@ export class List extends Component {
     async loadPokemons() {
         this.pokemons = await this.repo.load();
         this.manageComponent();
-        //  const responses = await Promise.all(
-        //      this.cards.map((e) => fetch(e.url))
-        //  );
-        //  this.pokemons = await Promise.all(responses.map((e) => e.json()));
     }
 
     loadPokemon(id: string) {
