@@ -1,0 +1,43 @@
+* {
+    font-family: 'Sora', sans-serif;
+    text-align: center;
+}
+
+body {
+    background-color: khaki;
+}
+
+ul {
+    list-style: none;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.item {
+    padding: 1rem;
+    background-color: white;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(63, 55, 20, 0.2);
+}
+
+.item__image {
+    display: flex;
+    height: 250px;
+}
+
+.item__image img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+}
+
+.item__info p {
+    font-weight: bold;
+    text-transform: capitalize;
+}

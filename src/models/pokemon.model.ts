@@ -16,13 +16,22 @@ export type PokemonListType = {
     url: string;
 };
 
+type PokemonDreamWorldImagesType = {
+    front_default: string;
+};
+
+type PokemonMoreImagesType = {
+    dream_world: PokemonDreamWorldImagesType;
+};
+
 type PokemonImagesType = {
     front_default: string;
+    other: PokemonMoreImagesType;
 };
 
 export type PokemonDetailsType = {
     name: string;
-    sprites: Object<PokemonImagesType>;
+    sprites: PokemonImagesType;
     id: number;
 };
 

@@ -27,9 +27,7 @@ export class List extends Component {
 
         try {
             await this.pokemonsDetails.forEach((item) => {
-                console.log('Antes de instanciar Item -> ');
-                console.log(item);
-                new Item('ul.slot-items', item);
+                new Item('ul.items', item);
             });
         } catch (error) {
             console.log((error as Error).message);
@@ -56,8 +54,6 @@ export class List extends Component {
             })
         ).then((data) => {
             this.pokemonsDetails = data;
-            console.log('Esto es pokemonsDetails ->');
-            console.log(this.pokemonsDetails);
             this.manageComponent();
         });
 
@@ -66,10 +62,11 @@ export class List extends Component {
 
     private createTemplate() {
         return `
-        <section class="pokemons">
-            <h3>Lista de Pokemons</h3>
-            <ul class="slot-items"></ul>
-        </section>
+            <h3>Pokemon List</h3>
+            <ul class="items"></ul>
+            <div class="pagination">
+                <button id="btn-next">Siguiente</button>
+            </div>
         `;
     }
 }
