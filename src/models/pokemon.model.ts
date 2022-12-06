@@ -14,7 +14,6 @@ export type PokemonObjType = {
 export type PokemonListType = {
     name: string;
     url: string;
-    id: string;
 };
 
 type PokemonImagesType = {
