@@ -21,7 +21,7 @@ export class HomePage extends Component {
         return `
         <main>
             <h2>Home</h2>
-            <section name="home"></section>
+            <section name="home"></section>            
         </main>
         `;
     }
