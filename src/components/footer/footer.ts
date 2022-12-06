@@ -9,14 +9,13 @@ export class Footer extends Component {
     render() {
         return super.innRender(this.selector);
     }
-
     private createTemplate() {
         return `
-        <footer>
-            <address>
-               Patricia Rufino | ISDI Coders | 2022
-            </address>
-        </footer>
-        `;
+<footer>
+    <address>
+        Patricia Rufino | ISDI Coders | 2022
+    </address>
+</footer>
+`;
     }
 }
