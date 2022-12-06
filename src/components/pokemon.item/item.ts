@@ -22,9 +22,13 @@ export class Item extends Component {
 
     createTemplate() {
         return `
-        <li class="item-task">           
-            <p>${this.item.name}</p>
-            <img src="${this.item.sprites.front_default}">
+        <li class="item">        
+            <div class="item__image">
+                <img src="${this.item.sprites.other.dream_world.front_default}">
+            </div>   
+            <div class="item__info">
+                <p>${this.item.name}</p>
+            </div>
         </li>
         `;
     }

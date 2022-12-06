@@ -2,7 +2,7 @@ import { Pokemon } from '../models/pokemon.model.js';
 import { Repository } from './repo.js';
 
 export class PokemonsRepo implements Repository<Pokemon> {
-    url = 'https://pokeapi.co/api/v2/pokemon/'; // ponemos la dirección del repositorio
+    url = 'https://pokeapi.co/api/v2/pokemon?limit=40&offset=0'; // ponemos la dirección del repositorio
 
     load() {
         return fetch(this.url).then((respuesta) => {
