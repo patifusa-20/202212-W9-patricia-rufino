@@ -1,36 +1,19 @@
 import {
-    PokemonListType,
     PokemonDetailsType,
     PokemonObjType,
 } from '../../models/pokemon.model.js';
-import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Component } from '../component/component.js';
 
 export class Item extends Component {
     pokemons!: PokemonObjType;
-    pokemonData: PokemonDetailsType;
-    repo: PokemonsRepo;
-    constructor(private selector: string, private item: PokemonListType) {
+    pokemonData!: PokemonDetailsType;
+    constructor(
+        private selector: string,
+        private item: PokemonDetailsType //private getPokemonData: (url: string) => Promise<any>
+    ) {
         super();
-
-        this.item = item;
-        this.repo = new PokemonsRepo();
-        this.pokemonData = this.getPokemonData();
         this.template = this.createTemplate();
         this.render();
-    }
-
-    getPokemonId() {
-        return this.item.url
-            .replace('https://pokeapi.co/api/v2/pokemon/', '')
-            .replace('/', '');
-    }
-
-    async getPokemonData() {
-        const response = await fetch(this.item.url);
-        this.pokemonData = await response.json();
-        console.log(this.pokemonData);
-        return this.pokemonData;
     }
 
     render() {
@@ -39,10 +22,9 @@ export class Item extends Component {
 
     createTemplate() {
         return `
-        <li class="item-task">       
+        <li class="item-task">           
             <p>${this.item.name}</p>
-            <p>${this.item.url}</p>
-            <p>${this.pokemonData.name}</p>
+            <img src="${this.item.sprites.front_default}">
         </li>
         `;
     }

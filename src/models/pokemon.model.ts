@@ -14,12 +14,15 @@ export type PokemonObjType = {
 export type PokemonListType = {
     name: string;
     url: string;
-    id: string;
+};
+
+type PokemonImagesType = {
+    front_default: string;
 };
 
 export type PokemonDetailsType = {
     name: string;
-    sprites: object;
+    sprites: Object<PokemonImagesType>;
     id: number;
 };
 

@@ -1,28 +1,35 @@
 import { Component } from '../component/component.js';
 import {
     PokemonDetailsType,
-    PokemonObjType,
+    PokemonListType,
 } from '../../models/pokemon.model.js';
 import { Item } from '../pokemon.item/item.js';
 import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 
 export class List extends Component {
-    pokemons!: PokemonObjType;
+    pokemonsUrl!: Array<PokemonListType>;
+    pokemonsDetails!: Array<PokemonDetailsType>;
     pokemon!: PokemonDetailsType;
     repo = new PokemonsRepo();
     constructor(private selector: string) {
         super();
-        this.manageComponent(); // te pinta el componente aunque no le hayan llegado aún los Pokemons.
-        this.loadPokemons();
+        this.init();
     }
 
-    manageComponent() {
+    async init() {
+        await this.loadPokemons();
+        await this.getPokemonData();
+    }
+
+    async manageComponent() {
         this.template = this.createTemplate();
         this.render();
+
         try {
-            this.pokemons?.results?.forEach((item) => {
-                const poke = new Item('ul.slot-items', item);
-                poke.getPokemonData();
+            await this.pokemonsDetails.forEach((item) => {
+                console.log('Antes de instanciar Item -> ');
+                console.log(item);
+                new Item('ul.slot-items', item);
             });
         } catch (error) {
             console.log((error as Error).message);
@@ -35,19 +42,26 @@ export class List extends Component {
     }
 
     async loadPokemons() {
-        this.pokemons = await this.repo.load();
-        this.manageComponent();
-        //  const responses = await Promise.all(
-        //      this.cards.map((e) => fetch(e.url))
-        //  );
-        //  this.pokemons = await Promise.all(responses.map((e) => e.json()));
+        const pokemonSV2 = await this.repo.load();
+        this.pokemonsUrl = await pokemonSV2.results;
+        return this.pokemonsUrl;
     }
 
-    loadPokemon(id: string) {
-        return this.repo
-            .query(id)
-            .then((data) => console.log(data))
-            .catch((error) => console.log(error.message));
+    async getPokemonData() {
+        // Lo siguiente me devuelve una promesa
+        Promise.all(
+            this.pokemonsUrl.map(async (element) => {
+                const response = fetch(element.url);
+                return (await response).json();
+            })
+        ).then((data) => {
+            this.pokemonsDetails = data;
+            console.log('Esto es pokemonsDetails ->');
+            console.log(this.pokemonsDetails);
+            this.manageComponent();
+        });
+
+        return this.pokemonsDetails;
     }
 
     private createTemplate() {
