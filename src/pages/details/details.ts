@@ -1,6 +1,5 @@
 import { Component } from '../../components/component/component.js';
 import { DetailsPokemon } from '../../components/pokemon.details/details.js';
-import { PokemonDetailsType } from '../../models/pokemon.model.js';
 
 export class DetailsPage extends Component {
     itemId!: string;

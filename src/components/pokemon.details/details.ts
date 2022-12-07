@@ -1,7 +1,4 @@
-import {
-    PokemonDetailsType,
-    PokemonObjType,
-} from '../../models/pokemon.model.js';
+import { PokemonDetailsType } from '../../models/pokemon.model.js';
 import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Component } from '../component/component.js';
 
@@ -9,18 +6,15 @@ export class DetailsPokemon extends Component {
     pokemonDetails!: PokemonDetailsType;
     repo = new PokemonsRepo();
     url: string;
-    constructor(
-        private selector: string,
-        private itemId: string //private getPokemonData: (url: string) => Promise<any>
-    ) {
+    constructor(private selector: string, private itemId: string) {
         super();
-        this.url = `https://pokeapi.co/api/v2/pokemon/${itemId}`;
+        this.url = `https://pokeapi.co/api/v2/pokemon/${this.itemId}`;
         this.getPokemonData();
     }
 
     async manageComponent() {
-        this.template = await this.createTemplate();
-        await this.render();
+        this.template = this.createTemplate();
+        this.render();
     }
 
     render() {

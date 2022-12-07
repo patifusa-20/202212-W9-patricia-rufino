@@ -29,7 +29,7 @@ export class List extends Component {
         this.render();
         try {
             new Pagination('.pagination', this.init.bind(this), url);
-            await this.pokemonsDetails.forEach((item) => {
+            this.pokemonsDetails.forEach((item) => {
                 new Item('ul.items', item);
             });
         } catch (error) {
