@@ -7,16 +7,17 @@ import { Item } from '../pokemon.item/item.js';
 import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Pagination } from '../pokemon.pagination/pagination.js';
 
-const url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
-
 export class List extends Component {
     pokemonsUrl!: Array<PokemonListType>;
     pokemonsDetails!: Array<PokemonDetailsType>;
     repo = new PokemonsRepo();
 
-    constructor(private selector: string) {
+    constructor(
+        private selector: string,
+        public url: string = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+    ) {
         super();
-        this.init(url);
+        this.init(this.url);
     }
 
     async init(url: string) {
@@ -28,7 +29,7 @@ export class List extends Component {
         this.template = this.createTemplate();
         this.render();
         try {
-            new Pagination('.pagination', this.init.bind(this), url);
+            new Pagination('.pagination', this.init.bind(this), this.url);
             this.pokemonsDetails.forEach((item) => {
                 new Item('ul.items', item);
             });
@@ -50,7 +51,6 @@ export class List extends Component {
     }
 
     async getPokemonData() {
-        // Lo siguiente me devuelve una promesa
         Promise.all(
             this.pokemonsUrl.map(async (element) => {
                 return await this.repo.load(element.url);

@@ -19,12 +19,12 @@ export class Item extends Component {
     render() {
         const element = super.innRender(this.selector);
         element
-            .querySelector('.item__image')
-            ?.addEventListener('click', this.handleDetailsButton.bind(this));
+            .querySelector('#favourite-btn')
+            ?.addEventListener('click', this.handleFavouriteButton.bind(this));
         return element;
     }
 
-    handleDetailsButton() {
+    handleFavouriteButton() {
         console.log('estoy clicando');
     }
 
@@ -37,11 +37,11 @@ export class Item extends Component {
             </div>
             <div class="item__info">
                 <p>${this.item.name}</p>
-            </div>
-            <button type="button" class="icon-btn"><span class="material-symbols-outlined">
+            </div></a>
+            <button type="button" id="favourite-btn" class="icon-btn"><span class="material-symbols-outlined">
 favorite
 </span></button>
-            </a>
+            
         </li>
         `;
     }

@@ -11,7 +11,6 @@ export class App {
     constructor() {
         this.menuOptions = [
             { path: './index.html', label: 'Home' },
-            { path: './details.html', label: 'Details' },
             { path: './favourites.html', label: 'Favourites' },
         ];
         try {
@@ -25,14 +24,19 @@ export class App {
     }
 
     router() {
+        // Consulta la url que en ese momento se está cargando en el navegador
         const path = './' + location.pathname.split('/').at(-1);
+        // Si el path existe es true y entonces empieza a comprobar cada caso ->
         switch (path) {
+            // Si el path corresponde con path index.html , me instancia el objeto que corresponda
             case this.menuOptions[0].path:
                 return new HomePage('.root');
-            case this.menuOptions[1].path:
+            // Si el path corresponde con path details.html , me instancia el objeto que corresponda
+            case './details.html':
                 return new DetailsPage('.root');
             case this.menuOptions[2].path:
                 return new FavouritesPage('.root');
+            // Si no existe el path, me devuelves un error.
             default:
                 throw new Error('Path no disponible');
         }
