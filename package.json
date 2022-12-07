@@ -9,7 +9,8 @@
         "build": "tsc",
         "test": "jest --watchAll --coverage",
         "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTests",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "server": "json-server --watch ./server/db.json"
     },
     "keywords": [],
     "author": "Patricia Rufino",
@@ -46,6 +47,8 @@
     "dependencies": {
         "@testing-library/user-event": "^14.4.3",
         "@types/testing-library__dom": "^7.5.0",
+        "i": "^0.3.7",
+        "json-server": "^0.17.1",
         "pokedex-promise-v2": "^4.0.0"
     }
 }

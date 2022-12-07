@@ -1,19 +1,14 @@
-import {
-    PokemonDetailsType,
-    PokemonObjType,
-} from '../../models/pokemon.model.js';
+import { PokemonDetailsType } from '../../models/pokemon.model.js';
+import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Component } from '../component/component.js';
 
 export class Item extends Component {
-    pokemons!: PokemonObjType;
-    pokemonData!: PokemonDetailsType;
-    constructor(
-        private selector: string,
-        private item: PokemonDetailsType //private getPokemonData: (url: string) => Promise<any>
-    ) {
+    elementRender: Element;
+    repo = new PokemonsRepo();
+    constructor(private selector: string, private item: PokemonDetailsType) {
         super();
         this.template = this.createTemplate();
-        this.render();
+        this.elementRender = this.render();
     }
 
     render() {
@@ -24,8 +19,20 @@ export class Item extends Component {
         return element;
     }
 
+    async updateFavouritesList() {
+        const url = 'http://localhost:3000/pokemons';
+        await this.repo
+            .create(this.item, url)
+            .then((data) => console.log(data));
+    }
+
     handleFavouriteButton() {
-        console.log('estoy clicando');
+        console.log(
+            `estoy clicando el botón de favorito del Pokemon ${this.item.name}`
+        );
+        const favouriteBtn = this.elementRender.querySelector('#favourite-btn');
+        favouriteBtn?.classList.add('isFavourite');
+        this.updateFavouritesList();
     }
 
     createTemplate() {

@@ -34,7 +34,7 @@ export class App {
             // Si el path corresponde con path details.html , me instancia el objeto que corresponda
             case './details.html':
                 return new DetailsPage('.root');
-            case this.menuOptions[2].path:
+            case this.menuOptions[1].path:
                 return new FavouritesPage('.root');
             // Si no existe el path, me devuelves un error.
             default:
