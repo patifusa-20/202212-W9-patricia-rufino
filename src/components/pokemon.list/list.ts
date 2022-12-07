@@ -7,18 +7,16 @@ import { Item } from '../pokemon.item/item.js';
 import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Pagination } from '../pokemon.pagination/pagination.js';
 
+const url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
+
 export class List extends Component {
     pokemonsUrl!: Array<PokemonListType>;
     pokemonsDetails!: Array<PokemonDetailsType>;
     repo = new PokemonsRepo();
-    urlOffsetPokemon = 0;
-    resultsPerPage = 20;
-    maxResults = 300;
-    url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
 
     constructor(private selector: string) {
         super();
-        this.init(this.url);
+        this.init(url);
     }
 
     async init(url: string) {
@@ -30,7 +28,7 @@ export class List extends Component {
         this.template = this.createTemplate();
         this.render();
         try {
-            //new Pagination('.pagination');
+            new Pagination('.pagination', this.init.bind(this), url);
             await this.pokemonsDetails.forEach((item) => {
                 new Item('ul.items', item);
             });
@@ -42,12 +40,6 @@ export class List extends Component {
     render() {
         super.cleanHtml(this.selector);
         const element = super.innRender(this.selector);
-        document
-            .querySelector('#btn-next')
-            ?.addEventListener('click', this.handleNextButton.bind(this));
-        document
-            .querySelector('#btn-prev')
-            ?.addEventListener('click', this.handlePrevButton.bind(this));
         return element;
     }
 
@@ -71,44 +63,10 @@ export class List extends Component {
         return this.pokemonsDetails;
     }
 
-    refreshNextPage(page: number) {
-        page = page + this.resultsPerPage;
-        this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page}`;
-        this.init(this.url);
-        return (this.urlOffsetPokemon = page);
-    }
-
-    refreshPrevPage(page: number) {
-        page = page - this.resultsPerPage;
-        this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${page}`;
-        this.init(this.url);
-        return (this.urlOffsetPokemon = page);
-    }
-
-    handleNextButton() {
-        this.refreshNextPage(this.urlOffsetPokemon);
-    }
-
-    handlePrevButton() {
-        this.refreshPrevPage(this.urlOffsetPokemon);
-    }
-
     private createTemplate() {
         return `
 <h3>Pokemon List</h3>
-<div class="pagination"><p>${this.resultsPerPage + this.urlOffsetPokemon} / ${
-            this.maxResults
-        }</p>
-${
-    this.urlOffsetPokemon === 0
-        ? ``
-        : `<button type="button" id="btn-prev">Prev</button>`
-}   
-${
-    this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
-        ? ``
-        : `<button type="button" id="btn-next">Next</button>`
-} </div>  
+<div class="pagination"></div>  
 <ul class="items"></ul>  
 `;
     }

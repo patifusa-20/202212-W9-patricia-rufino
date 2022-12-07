@@ -1,13 +1,17 @@
 import { Component } from '../component/component.js';
 
+let urlOffsetPokemon = 0;
 export class Pagination extends Component {
-    urlOffsetPokemon = 0;
     resultsPerPage = 20;
     maxResults = 300;
-    url = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0';
-    constructor(private selector: string, private init: (url: string) => void) {
+    url: string;
+    constructor(
+        private selector: string,
+        private init: (url: string) => void,
+        url: string
+    ) {
         super();
-        this.url;
+        this.url = url;
         this.template = this.createTemplate();
         this.render();
     }
@@ -23,35 +27,35 @@ export class Pagination extends Component {
         return element;
     }
 
-    refreshNextPage(urlOffsetPokemon: number) {
+    refreshNextPage() {
         urlOffsetPokemon = urlOffsetPokemon + this.resultsPerPage;
         this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${urlOffsetPokemon}`;
         this.init(this.url);
-        return this.urlOffsetPokemon;
+        return urlOffsetPokemon;
     }
 
-    refreshPrevPage(urlOffsetPokemon: number) {
+    refreshPrevPage() {
         urlOffsetPokemon = urlOffsetPokemon - this.resultsPerPage;
         this.url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${urlOffsetPokemon}`;
         this.init(this.url);
-        return this.urlOffsetPokemon;
+        return urlOffsetPokemon;
     }
 
     handleNextButton() {
         console.log('estoy clicando');
-        this.refreshNextPage(this.urlOffsetPokemon);
+        this.refreshNextPage();
     }
 
     handlePrevButton() {
-        this.refreshPrevPage(this.urlOffsetPokemon);
+        this.refreshPrevPage();
     }
 
     createTemplate() {
         return `
-<p>${this.resultsPerPage + this.urlOffsetPokemon} / ${this.maxResults}</p>
-${this.urlOffsetPokemon === 0 ? `` : `<button id="btn-prev">Prev</button>`}   
+<p>${this.resultsPerPage + urlOffsetPokemon} / ${this.maxResults}</p>
+${urlOffsetPokemon === 0 ? `` : `<button id="btn-prev">Prev</button>`}   
 ${
-    this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
+    this.resultsPerPage + urlOffsetPokemon === this.maxResults
         ? ``
         : `<button id="btn-next">Next</button>`
 }  
