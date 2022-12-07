@@ -10,34 +10,92 @@ a {
 }
 
 body {
-    background-color: khaki;
+    background-color: rgb(255, 255, 255);
     color: black;
     margin: 0;
+    min-height: 100vh;
+    font-size: 0;
+}
+
+.root {
+    min-height: 100vh;
+}
+
+main {
+    padding: 1rem 0;
+    background-color: khaki;
+    min-height: 70vh;
+}
+
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1rem;
+}
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 16px;
 }
 
 ul {
     list-style: none;
+    padding: 0;
+}
+
+.icon-btn {
+    border: 0;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    transition: all 1s;
+}
+
+.icon-btn:hover {
+    background-color: red;
+    color: white;
 }
 
 nav ul {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    font-size: 16px;
 }
 
 nav ul li:nth-child(2) {
     display: none;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 footer {
-    position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
+    font-size: 16px;
+}
+
+.header-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination {
+    display: flex;
 }
 
 .pagination button {
@@ -46,18 +104,30 @@ footer {
     background-color: coral;
     border-radius: 2rem;
     cursor: pointer;
+    transition: all 1s;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination button:first-of-type {
+    padding-left: 0.5rem;
+}
+.pagination button:last-of-type {
+    padding-right: 0.5rem;
 }
 
 .pagination button:hover {
-    background-color: rgb(211, 91, 48);
-    color: white;
+    background-color: rgb(245, 228, 73);
 }
 
 .items {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .item {
@@ -67,6 +137,11 @@ footer {
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(63, 55, 20, 0.2);
+    transition: all 1s;
+}
+
+.item:hover {
+    transform: scale(1.1);
 }
 
 .item__image {
@@ -86,11 +161,12 @@ footer {
 }
 
 .item-detail {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     background-color: white;
-    margin: 0 0 1rem;
+    margin: 0 auto 1rem;
     padding: 2rem;
+    border-radius: 2rem;
 }
 .item-detail__images {
 }
