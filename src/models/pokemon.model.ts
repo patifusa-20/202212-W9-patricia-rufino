@@ -26,12 +26,18 @@ type PokemonMoreImagesType = {
 
 type PokemonImagesType = {
     front_default: string;
+    back_default: string;
+    front_shiny: string;
+    back_shiny: string;
     other: PokemonMoreImagesType;
 };
 
 export type PokemonDetailsType = {
     name: string;
     sprites: PokemonImagesType;
+    weight: number;
+    height: number;
+    base_experience: number;
     id: number;
 };
 

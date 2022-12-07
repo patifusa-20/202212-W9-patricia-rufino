@@ -48,19 +48,13 @@ export class Pagination extends Component {
 
     createTemplate() {
         return `
-            <p>${this.resultsPerPage + this.urlOffsetPokemon} / ${
-            this.maxResults
-        }</p>
-         ${
-             this.urlOffsetPokemon === 0
-                 ? ``
-                 : `<button id="btn-prev">Prev</button>`
-         }   
-            ${
-                this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
-                    ? ``
-                    : `<button id="btn-next">Next</button>`
-            }  
-        `;
+<p>${this.resultsPerPage + this.urlOffsetPokemon} / ${this.maxResults}</p>
+${this.urlOffsetPokemon === 0 ? `` : `<button id="btn-prev">Prev</button>`}   
+${
+    this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
+        ? ``
+        : `<button id="btn-next">Next</button>`
+}  
+`;
     }
 }
