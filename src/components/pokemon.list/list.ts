@@ -95,21 +95,21 @@ export class List extends Component {
 
     private createTemplate() {
         return `
-            <h3>Pokemon List</h3>
-            <div class="pagination"><p>${
-                this.resultsPerPage + this.urlOffsetPokemon
-            } / ${this.maxResults}</p>
-         ${
-             this.urlOffsetPokemon === 0
-                 ? ``
-                 : `<button id="btn-prev">Prev</button>`
-         }   
-            ${
-                this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
-                    ? ``
-                    : `<button id="btn-next">Next</button>`
-            } </div>  
-            <ul class="items"></ul>  
-        `;
+<h3>Pokemon List</h3>
+<div class="pagination"><p>${this.resultsPerPage + this.urlOffsetPokemon} / ${
+            this.maxResults
+        }</p>
+${
+    this.urlOffsetPokemon === 0
+        ? ``
+        : `<button type="button" id="btn-prev">Prev</button>`
+}   
+${
+    this.resultsPerPage + this.urlOffsetPokemon === this.maxResults
+        ? ``
+        : `<button type="button" id="btn-next">Next</button>`
+} </div>  
+<ul class="items"></ul>  
+`;
     }
 }
