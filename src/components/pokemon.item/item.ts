@@ -2,7 +2,6 @@ import {
     PokemonDetailsType,
     PokemonObjType,
 } from '../../models/pokemon.model.js';
-import { DetailsPage } from '../../pages/details/details.js';
 import { Component } from '../component/component.js';
 
 export class Item extends Component {
