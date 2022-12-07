@@ -53,11 +53,19 @@ export class Pagination extends Component {
     createTemplate() {
         return `
 <p>${this.resultsPerPage + urlOffsetPokemon} / ${this.maxResults}</p>
-${urlOffsetPokemon === 0 ? `` : `<button id="btn-prev">Prev</button>`}   
+${
+    urlOffsetPokemon === 0
+        ? ``
+        : `<button id="btn-prev"><span class="material-symbols-outlined">
+chevron_left
+</span>Prev</button>`
+}   
 ${
     this.resultsPerPage + urlOffsetPokemon === this.maxResults
         ? ``
-        : `<button id="btn-next">Next</button>`
+        : `<button id="btn-next">Next<span class="material-symbols-outlined">
+chevron_right
+</span></button>`
 }  
 `;
     }

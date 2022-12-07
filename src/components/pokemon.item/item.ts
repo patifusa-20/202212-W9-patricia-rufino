@@ -38,6 +38,9 @@ export class Item extends Component {
             <div class="item__info">
                 <p>${this.item.name}</p>
             </div>
+            <button type="button" class="icon-btn"><span class="material-symbols-outlined">
+favorite
+</span></button>
             </a>
         </li>
         `;

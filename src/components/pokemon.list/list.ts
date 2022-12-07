@@ -24,7 +24,7 @@ export class List extends Component {
         await this.getPokemonData();
     }
 
-    async manageComponent() {
+    manageComponent() {
         this.template = this.createTemplate();
         this.render();
         try {
@@ -64,9 +64,9 @@ export class List extends Component {
     }
 
     private createTemplate() {
-        return `
+        return `<div class="header-list">
 <h3>Pokemon List</h3>
-<div class="pagination"></div>  
+<div class="pagination"></div></div>  
 <ul class="items"></ul>  
 `;
     }
