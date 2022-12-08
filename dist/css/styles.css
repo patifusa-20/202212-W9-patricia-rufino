@@ -63,6 +63,17 @@ ul {
 .icon-btn:hover {
     background-color: coral;
     color: white;
+    border: 2px solid black;
+}
+
+.favourites .icon-btn {
+    display: none;
+}
+
+.isFavourite {
+    background-color: coral;
+    color: white;
+    border: 2px solid black;
 }
 
 nav ul {

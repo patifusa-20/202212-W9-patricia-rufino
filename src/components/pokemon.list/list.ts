@@ -10,6 +10,8 @@ import { Pagination } from '../pokemon.pagination/pagination.js';
 export class List extends Component {
     pokemonsUrl!: Array<PokemonListType>;
     pokemonsDetails!: Array<PokemonDetailsType>;
+    favouritesPokemons!: Array<PokemonDetailsType>;
+    updatedPokemonsDetailsList!: () => Array<PokemonDetailsType>;
     repo = new PokemonsRepo();
 
     constructor(
@@ -28,6 +30,7 @@ export class List extends Component {
     manageComponent() {
         this.template = this.createTemplate();
         this.render();
+        // Cuando me vayas a renderizar cada pokemon, consulta los pokemons que hay en la api local y a estos pásales un nuevo argumento en plan isFavourite=true
         try {
             new Pagination('.pagination', this.init.bind(this), this.url);
             this.pokemonsDetails.forEach((item) => {
@@ -57,10 +60,35 @@ export class List extends Component {
             })
         ).then((data) => {
             this.pokemonsDetails = data;
+            //No funciona el marcado de favorito
+            //this.loadFavouritesPokemons();
+
             this.manageComponent();
         });
 
         return this.pokemonsDetails;
+    }
+
+    // No funciona aún el marcado de favorito
+    // async loadFavouritesPokemons() {
+    //     const url = 'http://localhost:3000/pokemons';
+    //     //this.favouritesPokemons = await this.repo
+    //         .load(url)
+    //         .then((data) => this.createUpdatePokemonList());
+    //     return this.favouritesPokemons;
+    // }
+
+    async createUpdatePokemonList() {
+        const updatedPokemons = this.pokemonsDetails.map((pokemon) => {
+            for (const fav of this.favouritesPokemons) {
+                if (pokemon.id === fav.id) {
+                    pokemon.isFavourite = true;
+                }
+            }
+            return console.log(pokemon);
+        });
+        //No funciona el marcado
+        //return (this.updatedPokemonsDetailsList = updatedPokemons);
     }
 
     private createTemplate() {

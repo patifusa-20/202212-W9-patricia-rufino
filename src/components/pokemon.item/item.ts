@@ -1,19 +1,17 @@
-import {
-    PokemonDetailsType,
-    PokemonObjType,
-} from '../../models/pokemon.model.js';
+import { PokemonDetailsType } from '../../models/pokemon.model.js';
+import { PokemonsRepo } from '../../repository/pokemons.repo.js';
 import { Component } from '../component/component.js';
 
 export class Item extends Component {
-    pokemons!: PokemonObjType;
-    pokemonData!: PokemonDetailsType;
-    constructor(
-        private selector: string,
-        private item: PokemonDetailsType //private getPokemonData: (url: string) => Promise<any>
-    ) {
+    elementRender: Element;
+    repo = new PokemonsRepo();
+    favouriteBtn: string;
+    constructor(private selector: string, private item: PokemonDetailsType) {
         super();
+        this.item.isFavourite = false;
+        this.favouriteBtn = `icon-btn">`;
         this.template = this.createTemplate();
-        this.render();
+        this.elementRender = this.render();
     }
 
     render() {
@@ -24,8 +22,18 @@ export class Item extends Component {
         return element;
     }
 
+    async updateFavouritesList() {
+        const url = 'http://localhost:3000/pokemons';
+        await this.repo.create(this.item, url);
+        //this.favouriteBtn = `icon-btn favourite">`
+        return console.log(this.favouriteBtn);
+    }
+
     handleFavouriteButton() {
-        console.log('estoy clicando');
+        // const favouriteBtn = this.elementRender.querySelector('#favourite-btn');
+        // favouriteBtn?.classList.add('isFavourite');
+        this.updateFavouritesList();
+        console.log(this.item.name + ' ' + this.item.id);
     }
 
     createTemplate() {
@@ -38,7 +46,8 @@ export class Item extends Component {
             <div class="item__info">
                 <p>${this.item.name}</p>
             </div></a>
-            <button type="button" id="favourite-btn" class="icon-btn"><span class="material-symbols-outlined">
+            <button type="button" id="favourite-btn" class="
+            ${this.favouriteBtn}<span class="material-symbols-outlined">
 favorite
 </span></button>
             
