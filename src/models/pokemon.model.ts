@@ -39,6 +39,7 @@ export type PokemonDetailsType = {
     height: number;
     base_experience: number;
     id: number;
+    isFavourite: boolean;
 };
 
 export class Pokemon implements PokemonType {
