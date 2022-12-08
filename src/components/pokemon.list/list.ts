@@ -60,7 +60,8 @@ export class List extends Component {
             })
         ).then((data) => {
             this.pokemonsDetails = data;
-            this.loadFavouritesPokemons();
+            //No funciona el marcado de favorito
+            //this.loadFavouritesPokemons();
 
             this.manageComponent();
         });
@@ -68,13 +69,14 @@ export class List extends Component {
         return this.pokemonsDetails;
     }
 
-    async loadFavouritesPokemons() {
-        const url = 'http://localhost:3000/pokemons';
-        this.favouritesPokemons = await this.repo
-            .load(url)
-            .then((data) => this.createUpdatePokemonList());
-        return this.favouritesPokemons;
-    }
+    // No funciona aún el marcado de favorito
+    // async loadFavouritesPokemons() {
+    //     const url = 'http://localhost:3000/pokemons';
+    //     //this.favouritesPokemons = await this.repo
+    //         .load(url)
+    //         .then((data) => this.createUpdatePokemonList());
+    //     return this.favouritesPokemons;
+    // }
 
     async createUpdatePokemonList() {
         const updatedPokemons = this.pokemonsDetails.map((pokemon) => {
@@ -85,7 +87,8 @@ export class List extends Component {
             }
             return console.log(pokemon);
         });
-        return (this.updatedPokemonsDetailsList = updatedPokemons);
+        //No funciona el marcado
+        //return (this.updatedPokemonsDetailsList = updatedPokemons);
     }
 
     private createTemplate() {
